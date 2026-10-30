@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#176b5b">
+    <meta name="description" content="Registra le attività lavorative e consulta il consuntivo mensile, anche offline.">
+    <link rel="manifest" href="./manifest.json">
+    <link rel="icon" href="./icons/icon-192.png" type="image/png">
+    <link rel="apple-touch-icon" href="./icons/icon-192.png">
+    <link rel="stylesheet" href="./styles.css">
+    <title>Consuntivo</title>
+  </head>
+  <body>
+    <main class="app">
+      <header class="page-header">
+        <div class="brand-mark" aria-hidden="true">C</div>
+        <div>
+          <h1>Consuntivo</h1>
+          <p>Le tue attività, sempre a portata di mano.</p>
+        </div>
+      </header>
+
+      <section class="card report" aria-labelledby="report-title">
+        <h2 id="report-title">Riepilogo mensile</h2>
+        <div class="month-selector">
+          <button class="month-arrow" id="previous-month" type="button" aria-label="Mese precedente">‹</button>
+          <h3 id="month-label" aria-live="polite"></h3>
+          <button class="month-arrow" id="next-month" type="button" aria-label="Mese successivo">›</button>
+        </div>
+        <p class="month-total" id="month-total">Totale: 0 min</p>
+        <p class="entry-count muted" id="entry-count"></p>
+        <div id="client-totals" class="client-totals"></div>
+        <div id="entries" class="entries"></div>
+      </section>
+
+      <section class="card activity-form" aria-labelledby="form-title">
+        <h2 id="form-title">Nuova attività</h2>
+        <form id="activity-form">
+          <label for="activity-date">Data</label>
+          <input id="activity-date" name="date" type="date" required>
+
+          <label for="client">Cliente o commessa</label>
+          <input id="client" name="client" type="text" list="client-suggestions" placeholder="Es. Cliente Rossi" autocomplete="off" required maxlength="120">
+          <datalist id="client-suggestions"></datalist>
+
+          <fieldset>
+            <legend>Durata</legend>
+            <div class="duration-inputs">
+              <label class="sr-only" for="hours">Ore</label>
+              <input id="hours" name="hours" type="number" inputmode="numeric" min="0" step="1" placeholder="Ore" aria-label="Ore">
+              <label class="sr-only" for="minutes">Minuti</label>
+              <input id="minutes" name="minutes" type="number" inputmode="numeric" min="0" max="59" step="1" placeholder="Minuti" aria-label="Minuti">
+            </div>
+          </fieldset>
+
+          <label for="description">Descrizione <span class="muted">(facoltativa)</span></label>
+          <textarea id="description" name="description" rows="2" maxlength="500" placeholder="In poche parole, cosa hai fatto?"></textarea>
+
+          <button class="primary-button" type="submit">Salva attività</button>
+          <p class="form-message" id="form-message" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <footer>
+        <p>I dati restano salvati in questo dispositivo.</p>
+      </footer>
+    </main>
+    <script src="./app.js" defer></script>
+  </body>
+</html>
